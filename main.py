@@ -11,18 +11,28 @@ load_level(level)
 
 # add_element("player", kwargs=settings["player_start_values"])
 
+level_ = 0
+
 @events.every("quit")
 def on_quit():
-    pygame.quit()
+    global level_
+    level_ += 1
     
-
-try:
-    run()
-except:
+    if level_ > 1:
+        print("You Won!")
+        pygame.quit()
+        return
+    
     from prgrmr.engine import initialized_elements
     
+    for element in initialized_elements.values():
+        element.unregister_events()
+        
     initialized_elements.clear()
     
     level = load_mapfile("level2.levelmap")
     load_level(level)
     run()
+    
+
+run()

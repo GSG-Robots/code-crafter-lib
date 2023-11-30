@@ -1,5 +1,5 @@
 class Element:
-    pass
+    ...
 
 class PlayerElement(Element):
     pass

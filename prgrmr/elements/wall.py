@@ -8,7 +8,7 @@ from ..events import events
 
 
 @register_element("wall")
-@events.will_listen(["update", "draw"])
+# @events.will_listen(["update", "draw"])
 class Wall(ObstructingElement, pygame.sprite.Sprite):
     def __init__(self, x, y, width, height):
         super().__init__()
@@ -30,3 +30,7 @@ class Wall(ObstructingElement, pygame.sprite.Sprite):
     # @events.every("draw")
     def draw(self, screen):
         screen.blit(self.image, self.rect)
+
+    def unregister_events(self):
+        events.unregister_event_handler("update", self.update)
+        events.unregister_event_handler("draw", self.draw)
