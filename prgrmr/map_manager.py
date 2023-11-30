@@ -7,6 +7,8 @@ tiles = {
     "P": "player",
     " ": None,
     "W": "wall",
+    "R": "respawn",
+    "G": "goal"
 }
 
 def load_mapfile(path: str):

@@ -47,6 +47,7 @@ class HorizontalCollisionManager:
                 continue
             if not self.target.rect.colliderect(element.rect):
                 continue
+            
             if (
                 velocity_manager.x_velocity > 0
                 and self.target.rect.right >= element.rect.left
@@ -62,6 +63,24 @@ class HorizontalCollisionManager:
                 velocity_manager.x_velocity = 0
                 self.hit_left_wall = True
 
+class GeneralCollisionManager:
+    def __init__(self, apply_to):
+        self.target = apply_to
+
+        self.collides_with = set()
+
+    def apply(self):
+        self.collides_with.clear()
+
+        for element in initialized_elements.values():
+            if not isinstance(element, ObstructingElement):
+                continue
+            if element == self.target:
+                continue
+            if not self.target.rect.colliderect(element.rect):
+                continue
+            
+            self.collides_with.add(element)
 
 class VerticalCollisionManager:
     def __init__(self, apply_to):
@@ -86,20 +105,20 @@ class VerticalCollisionManager:
                 continue
             if not self.target.rect.colliderect(element.rect):
                 continue
-
+            
             if (
                 velocity_manager.y_velocity > 0
                 and self.target.rect.bottom >= element.rect.top
             ):
                 self.target.rect.bottom = element.rect.top
-                velocity_manager.y_velocity = 1
+                velocity_manager.y_velocity = 0
                 self.on_ground = True
             if (
                 velocity_manager.y_velocity < 0
                 and self.target.rect.top <= element.rect.bottom
             ):
                 self.target.rect.top = element.rect.bottom
-                velocity_manager.y_velocity = -1
+                velocity_manager.y_velocity = 0
                 self.on_ceiling = True
 
 
@@ -171,7 +190,6 @@ class FallingManager:
         else:
             self.is_falling = True
             
-        print(self.is_falling)
 
 
 class FrictionManager:
