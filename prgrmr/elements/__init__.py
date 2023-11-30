@@ -36,6 +36,9 @@ class Element:
 
     def apply_managers(self):
         self.managers.apply()
+        
+    def update(self):
+        self.apply_managers()
 
 
 availible_elements = {}
