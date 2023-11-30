@@ -1,5 +1,6 @@
-from prgrmr.managers import Manager, register
 import pygame
+
+from prgrmr.managers import Manager, register
 
 
 @register("jumping")

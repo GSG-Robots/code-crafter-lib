@@ -1,5 +1,5 @@
-from prgrmr.settings import settings
 from prgrmr.managers import Manager, register
+from prgrmr.settings import settings
 
 
 @register("screen_collision")

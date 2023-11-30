@@ -1,6 +1,7 @@
-from typing import Any, Union
 import enum
 import pathlib
+from typing import Any, Union
+
 from .utils.default_settings import DEFAULT_SETTINGS
 
 

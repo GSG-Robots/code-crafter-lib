@@ -1,8 +1,7 @@
 import pygame
 
 from prgrmr import settings
-
-from prgrmr.elements import register, Element, flags
+from prgrmr.elements import Element, flags, register
 from prgrmr.events import events
 
 

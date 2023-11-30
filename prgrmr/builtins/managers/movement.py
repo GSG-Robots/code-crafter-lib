@@ -1,4 +1,5 @@
 import pygame
+
 from prgrmr.managers import Manager, register
 
 

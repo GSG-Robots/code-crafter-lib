@@ -1,5 +1,6 @@
 from typing import Any, Callable, Union
-from .utils.bind_self import BoundCallable, bound, get_func, bind_self
+
+from .utils.bind_self import BoundCallable, bind_self, bound, get_func
 
 
 class Events:

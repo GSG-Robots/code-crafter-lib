@@ -1,8 +1,8 @@
 import pygame
 
-from prgrmr.settings import settings
 from prgrmr.elements import Element, flags, register
 from prgrmr.events import events
+from prgrmr.settings import settings
 
 
 @register("wall", "W")

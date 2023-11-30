@@ -1,12 +1,12 @@
 import pygame
+
+from prgrmr.engine import run
+from prgrmr.events import events
+from prgrmr.exceptions import *
+from prgrmr.load_builtins import load_builtins
+from prgrmr.map_manager import import_level, load_mapfile
 from prgrmr.settings import settings
 from prgrmr.utils.direct_set_functions import *
-from prgrmr.load_builtins import load_builtins
-from prgrmr.exceptions import *
-from prgrmr.events import events
-from prgrmr.map_manager import load_mapfile, import_level
-from prgrmr.engine import run
-
 
 load_builtins()
 

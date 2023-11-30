@@ -1,10 +1,13 @@
-import pygame
 from typing import Callable
-from .settings import settings
-from .events import events
-from .utils.conditions import INFINITE, NEVER
-from .exceptions import MissingElementError
+
+import pygame
+
 from prgrmr.elements import availible_elements
+
+from .events import events
+from .exceptions import MissingElementError
+from .settings import settings
+from .utils.conditions import INFINITE, NEVER
 
 initialized_elements = {}
 

@@ -1,7 +1,7 @@
 from typing import Union
 
-from .settings import settings
 from .engine import elm
+from .settings import settings
 
 tiles = {
     "P": "player",
