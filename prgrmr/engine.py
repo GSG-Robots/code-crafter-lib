@@ -3,19 +3,18 @@ from typing import Callable
 from .settings import settings
 from .events import events
 from .utils.conditions import INFINITE, NEVER
-from .utils.element_registry import ElementRegistry
 from .exceptions import MissingElementError
-from .utils.element_registry import element_registry
+from prgrmr.elements import availible_elements
 
 initialized_elements = {}
 
 
 def elm(name: str, nid: int = 0, args: tuple = (), kwargs: dict = {}):
-    if name not in element_registry():
+    if name not in availible_elements:
         raise MissingElementError(name)
     exact_name = f"{name}:{nid}"
     if exact_name not in initialized_elements:
-        initialized_elements[exact_name] = element_registry[name](*args, **kwargs)
+        initialized_elements[exact_name] = availible_elements[name](*args, **kwargs)
     return initialized_elements[exact_name]
 
 
@@ -31,7 +30,7 @@ def run(ending_condition: Callable = INFINITE):
 
     while ending_condition():
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT: # pylint: disable=no-member
                 ending_condition = NEVER
         screen.fill((255, 255, 255))
         events.raise_event("update")

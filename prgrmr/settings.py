@@ -3,6 +3,7 @@ import enum
 import pathlib
 from .utils.default_settings import DEFAULT_SETTINGS
 
+
 class SettingsFileType(enum.Enum):
     JSON = enum.auto()
     YAML = enum.auto()
@@ -11,7 +12,7 @@ class SettingsFileType(enum.Enum):
 class Settings:
     def __init__(self):
         self.settings = {}
-        
+
     def update(self, settings: dict):
         self.settings.update(settings)
 

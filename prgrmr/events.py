@@ -1,11 +1,14 @@
 from typing import Any, Callable, Union
 from .utils.bind_self import BoundCallable, bound, get_func, bind_self
 
+
 class Events:
     def __init__(self) -> None:
         self.event_handlers = {}
-        
-    def will_listen(self, attrs_or_cls: Union[list[str], type]) -> Union[type, callable]:
+
+    def will_listen(
+        self, attrs_or_cls: Union[list[str], type]
+    ) -> Union[type, callable]:
         def __decorator__(cls: type) -> type:
             class Wrapper(cls):
                 def __init__(self, *args, **kwargs):
@@ -20,8 +23,10 @@ class Events:
                         bind_self(self, attrs_or_cls)
                     else:
                         bind_self(self)
+
             Wrapper.__name__ = cls.__name__
             return Wrapper
+
         if isinstance(attrs_or_cls, type):
             return __decorator__(attrs_or_cls)
         else:
@@ -48,7 +53,7 @@ class Events:
 
     def unregister_event(self, event: str) -> None:
         del self.event_handlers[event]
-        
+
     def every(self, event: str) -> Callable:
         def __decorator__(handler: Callable) -> Callable:
             handler = bound(handler)
@@ -56,7 +61,7 @@ class Events:
             return handler
 
         return __decorator__
-    
+
     def raise_event(self, event: str, *args, **kwargs) -> None:
         for handler in self.event_handlers[event]:
             get_func(handler)(*args, **kwargs)

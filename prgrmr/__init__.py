@@ -1,13 +1,21 @@
-from .engine import run, elm as add_element
-from .settings import settings
-from .utils.direct_set_functions import *
-from . import prepare_defaults as __PD__
-from .utils.element_registry import register_element
-from .utils import element_types as element_types
-from .exceptions import *
-from .events import events
-from .map_manager import load_mapfile, load_level
+import pygame
+from prgrmr.settings import settings
+from prgrmr.utils.direct_set_functions import *
+from prgrmr.load_builtins import load_builtins
+from prgrmr.exceptions import *
+from prgrmr.events import events
+from prgrmr.map_manager import load_mapfile, import_level
+from prgrmr.engine import run
 
-def quit():
-    import pygame
-    pygame.quit()
+
+load_builtins()
+
+print("-" * 20)
+print("Welcome to prgrmr!")
+print("prgrmr is an easy-to-use game engine written in Python, using pygame.")
+print("For more information, visit https://prgrmr.jojojux.de")
+print("-" * 20)
+
+
+def quit_game():
+    pygame.quit()  # pylint: disable=no-member
