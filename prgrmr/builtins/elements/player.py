@@ -43,10 +43,6 @@ class Player(Element, pygame.sprite.Sprite):
     def on_collision(self, other_element):
         print(other_element)
 
-    # @events.every("update")
-    def update(self):
-        self.managers.apply()
-
     # @events.every("draw")
     def draw(self, screen):
         screen.blit(self.image, self.rect)
