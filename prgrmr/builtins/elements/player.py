@@ -29,12 +29,12 @@ class Player(Element, pygame.sprite.Sprite):
             allow_leaving_left=False,
             allow_leaving_right=False,
         )
-        self.add_manager("vertical_collision")
-        self.add_manager("horizontal_collision")
         self.add_manager("gravity")
         self.add_manager("jumping")
+        self.add_manager("vertical_collision")
         self.add_manager("friction")
-        self.add_manager("movement")
+        self.add_manager("movement", speed=2.5)
+        self.add_manager("horizontal_collision")
 
         events.register_event_handler("update", self.update)
         events.register_event_handler("draw", self.draw)

@@ -20,12 +20,19 @@ class HorizontalCollisionManager(Manager):
 
         for element in initialized_elements.values():
             if not self.target.rect.colliderect(element.rect):
-                # self.target.events.raise_event("collides", element)
                 continue
             if not element.has_flag(ElementFlags.OBSTRUCTS):
                 continue
             if element == self.target:
                 continue
+            
+            
+            if (
+                self.target.rect.top >= element.rect.bottom
+                or self.target.rect.bottom <= element.rect.top 
+            ):
+                return
+            
             if (
                 velocity_manager.x_velocity > 0
                 and self.target.rect.right >= element.rect.left

@@ -25,7 +25,14 @@ class VerticalCollisionManager(Manager):
                 continue
             if not self.target.rect.colliderect(element.rect):
                 continue
-
+            
+            
+            if not (
+                self.target.rect.left <= element.rect.right
+                or self.target.rect.right >= element.rect.left 
+            ):
+                return
+        
             if (
                 velocity_manager.y_velocity > 0
                 and self.target.rect.bottom >= element.rect.top
