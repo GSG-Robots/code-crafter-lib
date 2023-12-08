@@ -23,7 +23,9 @@ class MovementManager(Manager):
         self.right_key = right_key
 
     def move(self, x):
-        self.target.get_manager("velocity").x_velocity = x * self.speed
+        self.target.velocity.x.set(
+            x * self.speed, self.target.velocity.prio.DIRECT_INPUT
+        )
 
     def apply(self):
         keys = pygame.key.get_pressed()

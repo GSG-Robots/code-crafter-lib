@@ -9,7 +9,6 @@ class FrictionManager(Manager):
         self.min_speed = min_speed
 
     def apply(self):
-        velocity_manager = self.target.get_manager("velocity")
-        velocity_manager.x_velocity *= self.friction_rate
-        if abs(velocity_manager.x_velocity) < self.min_speed:
-            velocity_manager.x_velocity = 0
+        self.target.velocity.x.mul(self.friction_rate)
+        if abs(self.target.velocity.x.value) < self.min_speed:
+            self.target.velocity.x.set(0, self.target.velocity.prio.DEGRADED)

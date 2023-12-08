@@ -7,9 +7,13 @@ class Element:
     def __init__(self, flags_: set[flags] = None):
         super().__init__()
         self.flags = flags_ or set()
-        self.managers = Managers(self)
+        self.managers: Managers = Managers(self)
         self.events = Events()
-
+        
+    @property
+    def velocity(self):
+        return self.managers.get("velocity")
+    
     def has_flag(self, flag: flags):
         return flag in self.flags
 
@@ -25,20 +29,8 @@ class Element:
         else:
             self.add_flag(flag)
 
-    def add_manager(self, name: str, *args, **kwargs):
-        self.managers.add(name, *args, **kwargs)
-
-    def get_manager(self, name: str):
-        return self.managers.get(name)
-
-    def remove_manager(self, name: str):
-        self.managers.remove(name)
-
-    def apply_managers(self):
-        self.managers.apply()
-        
     def update(self):
-        self.apply_managers()
+        self.managers.apply()
 
 
 availible_elements = {}

@@ -22,13 +22,14 @@ class JumpingManager(Manager):
         if self.is_jumping:
             return
         self.is_jumping = True
-        self.target.get_manager("velocity").y_velocity = -self.jump_speed
+        self.target.velocity.y.set(-self.jump_speed, self.target.velocity.prio.DIRECT_INPUT)
 
     def apply(self):
         keys = pygame.key.get_pressed()
         if keys[self.jump_key]:
             self.jump()
+        print(self.is_jumping)
         if self.is_jumping:
-            self.target.get_manager("velocity").x_velocity *= self.jump_movement_limit
-        if self.target.get_manager("vertical_collision").on_ground:
+            self.target.velocity.x.mul(self.jump_movement_limit)
+        if self.target.managers.get("vertical_collision").on_ground:
             self.is_jumping = False

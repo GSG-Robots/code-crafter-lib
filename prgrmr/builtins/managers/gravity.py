@@ -11,11 +11,11 @@ class GravityManager(Manager):
 
     def apply(self):
         if self.is_falling:
-            self.target.get_manager("velocity").y_velocity += self.gravity_rate
+            self.target.velocity.y.add(self.gravity_rate, self.target.velocity.prio.INVISIBLE_FORCE)
         if self.allow_falling_off:
             return
 
-        if self.target.get_manager("vertical_collision").on_ground:
+        if self.target.managers.get("vertical_collision").on_ground:
             self.is_falling = False
         else:
             self.is_falling = True

@@ -19,22 +19,21 @@ class ScreenLockManager(Manager):
         self.allow_leaving_right = allow_leaving_right
 
     def apply(self):
-        collision_manager = self.target.get_manager("screen_collision")
-        velocity_manager = self.target.get_manager("velocity")
+        collision_manager = self.target.managers.get("screen_collision")
 
         if not self.allow_leaving_bottom and collision_manager.left_screen_bottom:
-            if velocity_manager.y_velocity > 0:
-                velocity_manager.y_velocity = 0
+            if self.target.velocity.y.value > 0:
+                self.target.velocity.y.set(0)
             self.target.rect.y = settings["resolution"][1] - self.target.rect.height
         if not self.allow_leaving_top and collision_manager.left_screen_top:
-            if velocity_manager.y_velocity < 0:
-                velocity_manager.y_velocity = 0
+            if self.target.velocity.y.value < 0:
+                self.target.velocity.y.set(0)
             self.target.rect.y = 0
         if not self.allow_leaving_left and collision_manager.left_screen_left:
-            if velocity_manager.x_velocity < 0:
-                velocity_manager.x_velocity = 0
+            if self.target.velocity.x.value < 0:
+                self.target.velocity.x.value = 0
             self.target.rect.x = 0
         if not self.allow_leaving_right and collision_manager.left_screen_right:
-            if velocity_manager.x_velocity > 0:
-                velocity_manager.x_velocity = 0
+            if self.target.velocity.x.value > 0:
+                self.target.velocity.x.value = 0
             self.target.rect.x = settings["resolution"][0] - self.target.rect.width

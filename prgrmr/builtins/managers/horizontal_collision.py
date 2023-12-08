@@ -12,8 +12,7 @@ class HorizontalCollisionManager(Manager):
         self.hit_right_wall = False
 
     def apply(self):
-        velocity_manager = self.target.get_manager("velocity")
-        screen_collision_manager = self.target.get_manager("screen_collision")
+        screen_collision_manager = self.target.managers.get("screen_collision")
 
         self.hit_left_wall = screen_collision_manager.left_screen_left
         self.hit_right_wall = screen_collision_manager.left_screen_right
@@ -34,16 +33,16 @@ class HorizontalCollisionManager(Manager):
                 return
             
             if (
-                velocity_manager.x_velocity > 0
+                self.target.velocity.x.value > 0
                 and self.target.rect.right >= element.rect.left
             ):
                 self.target.rect.right = element.rect.left
-                velocity_manager.x_velocity = 0
+                self.target.velocity.x.set(0)
                 self.hit_right_wall = True
             if (
-                velocity_manager.x_velocity < 0
+                self.target.velocity.x.value < 0
                 and self.target.rect.left <= element.rect.right
             ):
                 self.target.rect.left = element.rect.right
-                velocity_manager.x_velocity = 0
+                self.target.velocity.x.set(0)
                 self.hit_left_wall = True

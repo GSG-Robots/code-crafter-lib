@@ -14,9 +14,9 @@ def register(name):
 
 
 class Manager:
-    def __init__(self, apply_to: "Element"):
+    def __init__(self, apply_to: "..elements.Element"):
         super().__init__()
-        self.target: "Element" = apply_to
+        self.target: "..elements.Element" = apply_to
 
     def apply(self):
         raise NotImplementedError()
@@ -24,7 +24,7 @@ class Manager:
 
 class Managers:
     def __init__(self, apply_to):
-        self.target: "Element" = apply_to
+        self.target: "..elements.Element" = apply_to
         self.managers: dict[str, Manager] = {}
 
     def add(self, name: str, **kwargs):

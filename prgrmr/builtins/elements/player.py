@@ -21,20 +21,20 @@ class Player(Element, pygame.sprite.Sprite):
         self.rect.y = y
         self.speed = speed
 
-        self.add_manager("velocity")
-        self.add_manager("screen_collision")
-        self.add_manager(
+        self.managers.add("velocity")
+        self.managers.add("screen_collision")
+        self.managers.add(
             "screen_lock",
             allow_leaving_bottom=False,
             allow_leaving_left=False,
             allow_leaving_right=False,
         )
-        self.add_manager("gravity")
-        self.add_manager("jumping")
-        self.add_manager("vertical_collision")
-        self.add_manager("friction")
-        self.add_manager("movement", speed=2.5)
-        self.add_manager("horizontal_collision")
+        self.managers.add("gravity")
+        self.managers.add("vertical_collision")
+        self.managers.add("friction")
+        self.managers.add("movement", speed=2.5)
+        self.managers.add("horizontal_collision")
+        self.managers.add("jumping")
 
         events.register_event_handler("update", self.update)
         events.register_event_handler("draw", self.draw)
